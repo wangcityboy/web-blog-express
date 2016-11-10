@@ -1,5 +1,6 @@
 var mongodb = require('./db'),
     markdown = require('markdown').markdown;
+var moment = require('moment');
 
 function Post(name, head, title, tags, post) {
     this.name = name;
@@ -15,6 +16,9 @@ module.exports = Post;
 Post.prototype.save = function(callback) {
     var date = new Date();
     //存储各种时间格式，方便以后扩展
+
+    //var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+
     var time = {
         date: date,
         year : date.getFullYear(),
@@ -23,6 +27,7 @@ Post.prototype.save = function(callback) {
         minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
         date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
     }
+
     //要存入数据库的文档
     var post = {
         name: this.name,
@@ -92,7 +97,9 @@ Post.getTen = function(name, page, callback) {
                     }
                     //解析 markdown 为 html
                     docs.forEach(function (doc) {
-                        doc.post = markdown.toHTML(doc.post);
+                        if(doc.post){
+                            doc.post = markdown.toHTML(doc.post);
+                        }
                     });
                     callback(null, docs, total);
                 });
