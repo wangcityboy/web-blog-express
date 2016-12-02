@@ -7,7 +7,6 @@ mongodb: ./bin/mongod --dbpath ./blog/   需要启动
 /Users/chinaskin/myblog/web-blog-express/node_modules/mongodb/lib/utils.js:97
     process.nextTick(function() { throw err; });
                                   ^
-
 TypeError: Cannot read property 'slice' of undefined
     at convert_tree_to_html (/Users/chinaskin/myblog/web-blog-express/node_modules/markdown/lib/markdown.js:1556:20)
     at Object.toHTMLTree (/Users/chinaskin/myblog/web-blog-express/node_modules/markdown/lib/markdown.js:112:14)
